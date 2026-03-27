@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <title>ভীমগঞ্জ মডেল স্কুল - স্মার্ট রশিদ</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+
+<div id="input-section">
+    <h2 style="text-align: center;">ভীমগঞ্জ মডেল স্কুল</h2>
+    
+    <div class="upload-box">
+        <label><b>ধাপ ১: এক্সেল ফাইলটি সিলেক্ট করুন</b></label>
+        <input type="file" id="excel-file" accept=".xlsx, .xls">
+    </div>
+
+    <div class="form-group">
+        <div class="form-item"><label>রশিদ নং</label><input type="text" id="in-receipt-no" readonly></div>
+        <div class="form-item"><label>তারিখ</label><input type="date" id="in-date"></div>
+    </div>
+    
+    <div class="form-group">
+        <div class="form-item">
+            <label>শ্রেণি (ইংরেজি সংখ্যায়)</label>
+            <select id="in-class" onchange="findStudent()">
+                <option value="">সিলেক্ট করুন</option>
+                <option value="1">1 (১ম)</option>
+                <option value="2">2 (২য়)</option>
+                <option value="3">3 (৩য়)</option>
+                <option value="4">4 (৪র্থ)</option>
+                <option value="5">5 (৫ম)</option>
+                <option value="6">6 (৬ষ্ঠ)</option>
+                <option value="7">7 (৭ম)</option>
+                <option value="8">8 (৮ম)</option>
+                <option value="9">9 (৯ম)</option>
+                <option value="10">10 (১০ম)</option>
+            </select>
+        </div>
+        <div class="form-item">
+            <label>রোল নং (ইংরেজি সংখ্যায়)</label>
+            <input type="number" id="in-roll" placeholder="যেমন: 12" oninput="findStudent()">
+        </div>
+        <div class="form-item">
+            <label>ছাত্র/ছাত্রীর নাম</label>
+            <input type="text" id="in-student-name" readonly style="background:#eee">
+        </div>
+    </div>
+
+    <div class="form-group" style="background: #fdf2f2; padding: 10px; border-radius: 5px;">
+        <div class="form-item"><label>পূর্বের বকেয়া (৳)</label><input type="number" id="prev-due" readonly style="background:#eee;"></div>
+        <div class="form-item"><label>আজকের জমা (৳)</label><input type="number" id="today-pay" oninput="calculateBalance()" placeholder="0.00"></div>
+        <div class="form-item"><label>অবশিষ্ট বকেয়া (৳)</label><input type="number" id="current-due" readonly style="background:#fff3cd;"></div>
+    </div>
+
+    <div class="form-group">
+        <div class="form-item"><label>মাসের নাম</label>
+            <select id="in-month">
+                <option value="জানুয়ারি">জানুয়ারি</option>
+                <option value="ফেব্রুয়ারি">ফেব্রুয়ারি</option>
+                <option value="মার্চ">মার্চ</option>
+                <option value="এপ্রিল">এপ্রিল</option>
+                <option value="মে">মে</option>
+                <option value="জুন">জুন</option>
+                <option value="জুলাই">জুলাই</option>
+                <option value="আগস্ট">আগস্ট</option>
+                <option value="সেপ্টেম্বর">সেপ্টেম্বর</option>
+                <option value="অক্টোবর">অক্টোবর</option>
+                <option value="নভেম্বর">নভেম্বর</option>
+                <option value="ডিসেম্বর">ডিসেম্বর</option>
+            </select>
+        </div>
+        <div class="form-item"><label>কথায় (টাকা)</label><input type="text" id="in-words-text" readonly></div>
+    </div>
+
+    <div class="button-group">
+        <button class="btn-generate" onclick="generateReceipt()">রশিদ তৈরি করুন</button>
+        <button class="btn-print" onclick="window.print()">প্রিন্ট করুন</button>
+    </div>
+</div>
+
+<div id="receipt-area"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
